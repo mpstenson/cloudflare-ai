@@ -2,9 +2,9 @@
 
 namespace mpstenson\CloudflareAI;
 
+use mpstenson\CloudflareAI\Commands\CloudflareAICommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use mpstenson\CloudflareAI\Commands\CloudflareAICommand;
 
 class CloudflareAIServiceProvider extends PackageServiceProvider
 {

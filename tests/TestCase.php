@@ -3,8 +3,8 @@
 namespace mpstenson\CloudflareAI\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
 use mpstenson\CloudflareAI\CloudflareAIServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
