@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace mpstenson\CloudflareAI\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class CloudflareAICommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'cloudflare-ai';
 
     public $description = 'My command';
 

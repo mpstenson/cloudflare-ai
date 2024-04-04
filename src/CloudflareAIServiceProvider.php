@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace mpstenson\CloudflareAI;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
+use mpstenson\CloudflareAI\Commands\CloudflareAICommand;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class CloudflareAIServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
@@ -16,10 +16,10 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('skeleton')
+            ->name('cloudflare-ai')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_skeleton_table')
-            ->hasCommand(SkeletonCommand::class);
+            ->hasMigration('create_cloudflare-ai_table')
+            ->hasCommand(CloudflareAICommand::class);
     }
 }
