@@ -19,7 +19,6 @@ class CloudflareAIServiceProvider extends PackageServiceProvider
             ->name('cloudflare-ai')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_cloudflare-ai_table')
             ->hasCommand(CloudflareAICommand::class);
     }
 }
