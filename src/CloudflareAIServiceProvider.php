@@ -2,7 +2,6 @@
 
 namespace mpstenson\CloudflareAI;
 
-use mpstenson\CloudflareAI\Commands\CloudflareAICommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,8 +16,6 @@ class CloudflareAIServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('cloudflare-ai')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasCommand(CloudflareAICommand::class);
+            ->hasConfigFile();
     }
 }
