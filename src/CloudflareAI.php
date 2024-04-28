@@ -21,7 +21,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runModel(string $modelName, array $input): array | JsonResponse
+    public static function runModel(string $modelName, array $input): array|JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
 
@@ -45,7 +45,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runSpeechToText(string $modelName, $file): array | JsonResponse
+    public static function runSpeechToText(string $modelName, $file): array|JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
 
@@ -70,7 +70,8 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runImageClassification(string $modelName,string $file): array | JsonResponse{
+    public static function runImageClassification(string $modelName, string $file): array|JsonResponse
+    {
         $url = config('cloudflare-ai.api_url')
             .'/accounts/'
             .config('cloudflare-ai.account_id')
@@ -99,7 +100,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function listFinetunes(): array | JsonResponse
+    public static function listFinetunes(): array|JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/finetunes';
 
@@ -123,7 +124,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function createFinetune(string $description, string $model, string $name): array | JsonResponse
+    public static function createFinetune(string $description, string $model, string $name): array|JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/finetunes';
         $input = [
@@ -156,7 +157,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function listModels(?string $author = null, bool $hide_experimental = false, int $page = 1, int $per_page = 50, ?string $search = null, ?string $source = null, ?string $task = null): array | JsonResponse
+    public static function listModels(?string $author = null, bool $hide_experimental = false, int $page = 1, int $per_page = 50, ?string $search = null, ?string $source = null, ?string $task = null): array|JsonResponse
     {
         $queryString = '?per_page='.$per_page.'&page='.$page;
         if ($hide_experimental) {
