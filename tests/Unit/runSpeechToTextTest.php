@@ -2,11 +2,9 @@
 
 namespace Tests\Unit;
 
-use GuzzleHttp\Psr7\Request;
-use mpstenson\CloudflareAI\CloudflareAI;;
-use Illuminate\Foundation\Testing\WithFaker;
-use mpstenson\CloudflareAI\Tests\TestCase;
 use Illuminate\Support\Facades\Http;
+use mpstenson\CloudflareAI\CloudflareAI;
+use mpstenson\CloudflareAI\Tests\TestCase;
 
 class runSpeechToTextTest extends TestCase
 {
@@ -40,9 +38,9 @@ class runSpeechToTextTest extends TestCase
     public function test_run_model_throws_exception_on_error()
     {
         $expectedResponse = ['success' => false,
-        'errors' => [],
-        'messages' => [],
-        'result' => null];
+            'errors' => [],
+            'messages' => [],
+            'result' => null];
         $modelName = 'test-model';
         $input = 'test-input';
         Http::fake([
