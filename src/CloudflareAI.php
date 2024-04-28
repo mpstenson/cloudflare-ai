@@ -2,6 +2,7 @@
 
 namespace mpstenson\CloudflareAI;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 
 class CloudflareAI
@@ -16,11 +17,11 @@ class CloudflareAI
      *
      * @param  string  $modelName  The name of the model to run.
      * @param  array<string, mixed>  $input  The input for the model.
-     * @return array<string, mixed> The output of the model.
+     * @return array<string, mixed>|JsonResponse The output of the model or a JSON response if the request failed.
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runModel(string $modelName, array $input): array
+    public static function runModel(string $modelName, array $input): array | JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
 
@@ -40,11 +41,11 @@ class CloudflareAI
      *
      * @param  string  $modelName  The name of the model to run.
      * @param  string  $file  The audio file to send to the model. This is the body of the file
-     * @return array<string, mixed> The output of the model.
+     * @return array The output of the model.
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runSpeechToText(string $modelName, $file): array
+    public static function runSpeechToText(string $modelName, $file): array | JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
 
@@ -69,10 +70,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runImageClassification(
-        string $modelName,
-        string $file
-    ): array {
+    public static function runImageClassification(string $modelName,string $file): array | JsonResponse{
         $url = config('cloudflare-ai.api_url')
             .'/accounts/'
             .config('cloudflare-ai.account_id')
@@ -101,7 +99,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function listFinetunes(): array
+    public static function listFinetunes(): array | JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/finetunes';
 
@@ -125,7 +123,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function createFinetune(string $description, string $model, string $name): array
+    public static function createFinetune(string $description, string $model, string $name): array | JsonResponse
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/finetunes';
         $input = [
@@ -158,7 +156,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function listModels(?string $author = null, bool $hide_experimental = false, int $page = 1, int $per_page = 50, ?string $search = null, ?string $source = null, ?string $task = null): array
+    public static function listModels(?string $author = null, bool $hide_experimental = false, int $page = 1, int $per_page = 50, ?string $search = null, ?string $source = null, ?string $task = null): array | JsonResponse
     {
         $queryString = '?per_page='.$per_page.'&page='.$page;
         if ($hide_experimental) {
