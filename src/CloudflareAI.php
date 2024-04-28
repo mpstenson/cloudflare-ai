@@ -22,11 +22,11 @@ class CloudflareAI
     public static function runModel(string $modelName, array $input): array
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
-        
+
         try {
             $response = Http::withToken(config('cloudflare-ai.api_token'))
-                            ->contentType('application/json')
-                            ->post($url, $input);
+                ->contentType('application/json')
+                ->post($url, $input);
 
             return $response->json();
         } catch (\Illuminate\Http\Client\RequestException $e) {
@@ -45,7 +45,7 @@ class CloudflareAI
      */
     public static function runSpeechToText(string $modelName, $file): array
     {
-        $url = config('cloudflare-ai.api_url') . '/accounts/' . config('cloudflare-ai.account_id') . '/ai/run/@cf/' . $modelName;
+        $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
 
         try {
             $response = Http::withToken(config('cloudflare-ai.api_token'))
@@ -105,8 +105,8 @@ class CloudflareAI
      */
     public static function listFinetunes(): array
     {
-        $url = config('cloudflare-ai.api_url') . '/accounts/' . config('cloudflare-ai.account_id') . '/ai/finetunes';
-        
+        $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/finetunes';
+
         try {
             $response = Http::withToken(config('cloudflare-ai.api_token'))
                 ->get($url);
@@ -121,26 +121,25 @@ class CloudflareAI
     /**
      * Create a new finetune.
      *
-     * @param string $description A description of the finetune
-     * @param string $model The ID of the model to finetune
-     * @param string $name The name of the finetune
-     *
+     * @param  string  $description  A description of the finetune
+     * @param  string  $model  The ID of the model to finetune
+     * @param  string  $name  The name of the finetune
      * @return array The created finetune object
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function createFinetune(string $description = '', string $model, string $name): array
+    public static function createFinetune(string $description, string $model, string $name): array
     {
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/finetunes';
         $input = [
             'description' => $description,
             'model' => $model,
-            'name' => $name
+            'name' => $name,
         ];
         try {
             $response = Http::withToken(config('cloudflare-ai.api_token'))
-                            ->contentType('application/json')
-                            ->post($url, $input);
+                ->contentType('application/json')
+                ->post($url, $input);
 
             return $response->json();
         } catch (\Illuminate\Http\Client\RequestException $e) {
@@ -152,14 +151,13 @@ class CloudflareAI
     /**
      * Search for models in the Cloudflare AI Model Catalog.
      *
-     * @param string|null $author Filter by author
-     * @param bool        $hide_experimental Hide experimental models
-     * @param int         $page Page number
-     * @param int         $per_page Number of models per page
-     * @param string|null $search Filter by search query
-     * @param string|null $source Filter by source language
-     * @param string|null $task Filter by task
-     *
+     * @param  string|null  $author  Filter by author
+     * @param  bool  $hide_experimental  Hide experimental models
+     * @param  int  $page  Page number
+     * @param  int  $per_page  Number of models per page
+     * @param  string|null  $search  Filter by search query
+     * @param  string|null  $source  Filter by source language
+     * @param  string|null  $task  Filter by task
      * @return array<array<string,mixed>> List of models
      *
      * @throws \Illuminate\Http\Client\RequestException
@@ -187,7 +185,7 @@ class CloudflareAI
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/models/search'.$queryString;
 
         $response = Http::withToken(config('cloudflare-ai.api_token'))
-                        ->get($url);
+            ->get($url);
 
         return $response->json();
     }
