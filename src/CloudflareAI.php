@@ -14,9 +14,10 @@ class CloudflareAI
     /**
      * Runs a Cloudflare AI model with the given input.
      *
-     * @param string $modelName The name of the model to run.
-     * @param array<string, mixed> $input The input for the model.
+     * @param  string  $modelName  The name of the model to run.
+     * @param  array<string, mixed>  $input  The input for the model.
      * @return array<string, mixed> The output of the model.
+     *
      * @throws \Illuminate\Http\Client\RequestException
      */
     public static function runModel(string $modelName, array $input): array
@@ -38,9 +39,10 @@ class CloudflareAI
     /**
      * Runs a Cloudflare AI speech to text model with the given audio file.
      *
-     * @param string $modelName The name of the model to run.
-     * @param string $file The audio file to send to the model. This is the body of the file
+     * @param  string  $modelName  The name of the model to run.
+     * @param  string  $file  The audio file to send to the model. This is the body of the file
      * @return array<string, mixed> The output of the model.
+     *
      * @throws \Illuminate\Http\Client\RequestException
      */
     public static function runSpeechToText(string $modelName, $file): array
@@ -60,13 +62,13 @@ class CloudflareAI
         }
     }
 
-
     /**
      * Runs a Cloudflare AI image classification model with the given image file.
      *
-     * @param string $modelName The name of the model to run.
-     * @param string $file The image file to send to the model. This is the body of the file.
+     * @param  string  $modelName  The name of the model to run.
+     * @param  string  $file  The image file to send to the model. This is the body of the file.
      * @return array<string, mixed> The output of the model.
+     *
      * @throws \Illuminate\Http\Client\RequestException
      */
     public static function runImageClassification(
@@ -74,11 +76,11 @@ class CloudflareAI
         string $file
     ): array {
         $url = config('cloudflare-ai.api_url')
-            . '/accounts/'
-            . config('cloudflare-ai.account_id')
-            . '/ai/run/@cf/'
-            . $modelName;
-        
+            .'/accounts/'
+            .config('cloudflare-ai.account_id')
+            .'/ai/run/@cf/'
+            .$modelName;
+
         try {
             $response = Http::withToken(config('cloudflare-ai.api_token'))
                 ->contentType('application/octet-stream')
@@ -94,7 +96,6 @@ class CloudflareAI
             );
         }
     }
-
 
     /**
      * Get a list of finetunes.
