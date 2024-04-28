@@ -42,6 +42,7 @@ return [
 
 ## Usage
 
+### Run a completion
 ```php
     use mpstenson\CloudflareAI\CloudflareAI;
 
@@ -52,7 +53,12 @@ return [
            ]
         ]);
 ```
+### Transcribe Audio
+```php
+    use mpstenson\CloudflareAI\CloudflareAI;
 
+        $whisper = CloudflareAI::runSpeechToText('openai/whisper',fopen(storage_path().'/app/public/test.mp3', 'r'));
+```
 ## Testing
 
 ```bash
