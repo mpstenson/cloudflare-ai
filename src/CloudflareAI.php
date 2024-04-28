@@ -29,9 +29,8 @@ class CloudflareAI
                 ->contentType('application/json')
                 ->post($url, $input);
 
-            return $response->json();
+            return $response->json() ?? [];;
         } catch (\Illuminate\Http\Client\RequestException $e) {
-            // Handle the error according to your application's needs
             return response()->json(['error' => 'Request to Cloudflare API failed', 'details' => $e->getMessage()], 500);
         }
     }
@@ -57,7 +56,6 @@ class CloudflareAI
 
             return $response->json();
         } catch (\Illuminate\Http\Client\RequestException $e) {
-            // Handle the error according to your application's needs
             return response()->json(['error' => 'Request to Cloudflare API failed', 'details' => $e->getMessage()], 500);
         }
     }
@@ -89,7 +87,6 @@ class CloudflareAI
 
             return $response->json();
         } catch (\Illuminate\Http\Client\RequestException $e) {
-            // Handle the error according to your application's needs
             return response()->json(
                 ['error' => 'Request to Cloudflare API failed', 'details' => $e->getMessage()],
                 500
@@ -114,7 +111,6 @@ class CloudflareAI
 
             return $response->json();
         } catch (\Illuminate\Http\Client\RequestException $e) {
-            // Handle the error according to your application's needs
             return response()->json(['error' => 'Request to Cloudflare API failed', 'details' => $e->getMessage()], 500);
         }
     }
@@ -144,7 +140,6 @@ class CloudflareAI
 
             return $response->json();
         } catch (\Illuminate\Http\Client\RequestException $e) {
-            // Handle the error according to your application's needs
             return response()->json(['error' => 'Request to Cloudflare API failed', 'details' => $e->getMessage()], 500);
         }
     }
