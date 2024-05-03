@@ -1,7 +1,6 @@
 {
     "name": "mpstenson/cloudflare-ai",
     "description": "This package allows you to interact with Cloudflare AI web services.",
-    "version": "1.0.0",
     "keywords": [
         "mpstenson",
         "laravel",
