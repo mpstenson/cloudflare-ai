@@ -36,9 +36,16 @@ return [
     'api_url' => 'https://api.cloudflare.com/client/v4',
     'account_id' => env('CLOUDFLARE_ACCOUNT_ID', ''),
     'api_token' => env('CLOUDFLARE_API_TOKEN', ''),
+    'default_model' => env('CLOUDFLARE_DEFAULT_MODEL', 'meta/llama-3-8b-instruct'),
+    'default_speech_to_text_model' => env('CLOUDFLARE_DEFAULT_SPEECH_TO_TEXT_MODEL', 'openai/whisper'),
+    'default_image_classification_model' => env('CLOUDFLARE_DEFAULT_IMAGE_CLASSIFICATION_MODEL', 'microsoft/resnet-50'),
 ];
 ```
 
+Default models can be optionally specified in the .env file. If default models are specified they can still be overwritten on specific method calls.
+```CLOUDFLARE_DEFAULT_MODEL```
+```CLOUDFLARE_DEFAULT_SPEECH_TO_TEXT_MODEL```
+```CLOUDFLARE_DEFAULT_IMAGE_CLASSIFICATION_MODEL```
 
 ## Usage
 
@@ -46,18 +53,18 @@ return [
 ```php
     use mpstenson\CloudflareAI\CloudflareAI;
 
-        $response = CloudflareAI::runModel('meta/llama-2-7b-chat-int8',[
+        $response = CloudflareAI::runModel([
            'messages' => [
                ['role' => 'system', 'content' => 'You are a friendly assistant'],
                 ['role' => 'user', 'content' => 'Why is pizza so good'],
            ]
-        ]);
+        ],'meta/llama-2-7b-chat-int8');
 ```
 ### Transcribe Audio
 ```php
     use mpstenson\CloudflareAI\CloudflareAI;
 
-        $whisper = CloudflareAI::runSpeechToText('openai/whisper',fopen(storage_path().'/app/public/test.mp3', 'r'));
+        $whisper = CloudflareAI::runSpeechToText(fopen(storage_path().'/app/public/test.mp3', 'r'),'openai/whisper');
 ```
 ## Testing
 

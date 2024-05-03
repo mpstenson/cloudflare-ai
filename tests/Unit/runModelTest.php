@@ -24,7 +24,7 @@ class runModelTest extends TestCase
         ]);
 
         // Act
-        $result = CloudflareAI::runModel($modelName, $input);
+        $result = CloudflareAI::runModel($input,$modelName);
 
         // Assert
         $this->assertEquals($expectedResponse, $result);
@@ -47,7 +47,21 @@ class runModelTest extends TestCase
             config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName => Http::response($expectedResponse, 500),
         ]);
         // Act
-        $result = CloudflareAI::runModel($modelName, $input);
+        $result = CloudflareAI::runModel($input,$modelName);
+        $this->assertEquals($expectedResponse, $result);
+    }
+    /**
+     * Test that runModel defaults to model if none is specified.
+     * 
+     * @return void
+     */
+    public function test_run_model_defaults_to_model_if_none_specified() {
+        $input = ['test-input' => 'test-value'];
+        $expectedResponse = ['output' => 'result'];
+        Http::fake([
+            config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.config('cloudflare-ai.default_model') => Http::response($expectedResponse, 200),
+        ]);
+        $result = CloudflareAI::runModel($input);
         $this->assertEquals($expectedResponse, $result);
     }
 }

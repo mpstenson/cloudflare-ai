@@ -15,14 +15,15 @@ class CloudflareAI
     /**
      * Runs a Cloudflare AI model with the given input.
      *
-     * @param  string  $modelName  The name of the model to run.
      * @param  array<string, mixed>  $input  The input for the model.
+     * @param  string|null  $modelName  The name of the model to run. If null, the default model name is used.
      * @return array<string, mixed>|JsonResponse The output of the model or a JSON response if the request failed.
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runModel(string $modelName, array $input): array|JsonResponse
+    public static function runModel(array $input, ?string $modelName=null): array|JsonResponse
     {
+        $modelName ??= config('cloudflare-ai.default_model');
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
 
         try {
@@ -39,14 +40,15 @@ class CloudflareAI
     /**
      * Runs a Cloudflare AI speech to text model with the given audio file.
      *
-     * @param  string  $modelName  The name of the model to run.
      * @param  string  $file  The audio file to send to the model. This is the body of the file
+     * @param  string|null  $modelName  The name of the model to run.
      * @return array The output of the model.
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runSpeechToText(string $modelName, $file): array|JsonResponse
+    public static function runSpeechToText($file, ?string $modelName = null): array|JsonResponse
     {
+        $modelName ??= config('cloudflare-ai.default_speech_to_text_model');
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
 
         try {
@@ -61,17 +63,19 @@ class CloudflareAI
         }
     }
 
+
     /**
      * Runs a Cloudflare AI image classification model with the given image file.
      *
-     * @param  string  $modelName  The name of the model to run.
      * @param  string  $file  The image file to send to the model. This is the body of the file.
+     * @param  string|null  $modelName  The name of the model to run.
      * @return array<string, mixed> The output of the model.
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runImageClassification(string $modelName, string $file): array|JsonResponse
+    public static function runImageClassification(string $file,?string $modelName = null): array|JsonResponse
     {
+        $modelName ??= config('cloudflare-ai.default_image_classification_model');
         $url = config('cloudflare-ai.api_url')
             .'/accounts/'
             .config('cloudflare-ai.account_id')
