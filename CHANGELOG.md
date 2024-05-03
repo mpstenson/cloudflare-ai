@@ -2,6 +2,10 @@
 
 All notable changes to `cloudflare-ai` will be documented in this file.
 
+## 1.0.2 - 2024-05-03
+
+**Full Changelog**: https://github.com/mpstenson/cloudflare-ai/compare/1.0.1...1.0.2
+
 ## 1.0.1 - 2024-05-03
 
 ### What's Changed
