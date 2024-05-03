@@ -24,7 +24,7 @@ class runSpeechToTextTest extends TestCase
         ]);
 
         // Act
-        $result = CloudflareAI::runSpeechToText($input,$modelName);
+        $result = CloudflareAI::runSpeechToText($input, $modelName);
 
         // Assert
         $this->assertEquals($expectedResponse, $result);
@@ -47,16 +47,17 @@ class runSpeechToTextTest extends TestCase
             config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName => Http::response($expectedResponse, 500),
         ]);
         // Act
-        $result = CloudflareAI::runSpeechToText($input,$modelName);
+        $result = CloudflareAI::runSpeechToText($input, $modelName);
         $this->assertEquals($expectedResponse, $result);
     }
 
     /**
      * Test that runModel defaults to model if none is specified.
-     * 
+     *
      * @return void
      */
-    public function test_run_model_defaults_to_model_if_none_specified() {
+    public function test_run_model_defaults_to_model_if_none_specified()
+    {
         $input = 'test-input';
         $expectedResponse = ['output' => 'result'];
         Http::fake([

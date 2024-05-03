@@ -21,7 +21,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runModel(array $input, ?string $modelName=null): array|JsonResponse
+    public static function runModel(array $input, ?string $modelName = null): array|JsonResponse
     {
         $modelName ??= config('cloudflare-ai.default_model');
         $url = config('cloudflare-ai.api_url').'/accounts/'.config('cloudflare-ai.account_id').'/ai/run/@cf/'.$modelName;
@@ -63,7 +63,6 @@ class CloudflareAI
         }
     }
 
-
     /**
      * Runs a Cloudflare AI image classification model with the given image file.
      *
@@ -73,7 +72,7 @@ class CloudflareAI
      *
      * @throws \Illuminate\Http\Client\RequestException
      */
-    public static function runImageClassification(string $file,?string $modelName = null): array|JsonResponse
+    public static function runImageClassification(string $file, ?string $modelName = null): array|JsonResponse
     {
         $modelName ??= config('cloudflare-ai.default_image_classification_model');
         $url = config('cloudflare-ai.api_url')
